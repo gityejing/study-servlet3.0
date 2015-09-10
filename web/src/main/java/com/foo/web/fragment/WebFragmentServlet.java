@@ -21,8 +21,7 @@ public class WebFragmentServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.getWriter().println("<h1>Hello ,welcome to Servlet 3.0  WebFragmentServlet !</h1>");
-
+        request.getRequestDispatcher("test.jsp").forward(request,response);
     }
 
 
