@@ -1,6 +1,8 @@
-package com.foo.annotation.servlet;
+package com.foo.annotation.servlet.async;
 
 import javax.servlet.AsyncContext;
+import javax.servlet.AsyncEvent;
+import javax.servlet.AsyncListener;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +29,34 @@ public class TimeServlet extends HttpServlet {
         response.getWriter().println("<h1>Hello ,welcome to Servlet 3.0 !</h1>");
 
         AsyncContext asyncContext = request.startAsync();
+
+        //**
+
+        asyncContext.addListener(new AsyncListener() {
+            @Override
+            public void onComplete(AsyncEvent event) throws IOException {
+                System.out.println("onComplete=======");
+                event.getAsyncContext().getResponse().getWriter().println("<h1>Request Finish!</h1>");
+                event.getAsyncContext().getResponse().getWriter().flush();
+            }
+
+            @Override
+            public void onTimeout(AsyncEvent event) throws IOException {
+                System.out.println("onTimeout=======");
+            }
+
+            @Override
+            public void onError(AsyncEvent event) throws IOException {
+                System.out.println("onError=======");
+            }
+
+            @Override
+            public void onStartAsync(AsyncEvent event) throws IOException {
+                System.out.println("onStartAsync=======");
+            }
+        });
+
+
         TimeThread timeThread = new TimeThread(asyncContext);
         timeThread.start();
 
