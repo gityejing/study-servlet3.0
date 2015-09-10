@@ -1,5 +1,7 @@
 package com.foo.spi;
 
+import javax.servlet.ServletContainerInitializer;
+import javax.servlet.ServletContext;
 import java.util.ServiceLoader;
 
 /**
@@ -14,7 +16,6 @@ public class SpiDemo {
         ServiceLoader<Gun> serviceLoader =   ServiceLoader.load(Gun.class);
 
         Gun gun = serviceLoader.iterator().next();
-
 
         gun.fire();
 

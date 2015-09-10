@@ -20,7 +20,7 @@ public class HelloServelt extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
+        ClassLoader classLoader = getServletContext().getClassLoader();
         response.getWriter().println("<h1>Hello ,welcome to Servlet 3.0 !</h1>");
 
         response.getWriter().println("<h1>Hello ,welcome to Servlet 3.0 !</h1>");
